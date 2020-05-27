@@ -1,5 +1,5 @@
  <?php
-    class Requests{
+    class Request{
         private $connection;
         private $table='posts';
 
@@ -7,8 +7,10 @@
             $this->connection=$connection;
         }
 
-        public class getAll(){
-            $query='SELECT * FROM '.$table;
+        public function getAll(){
+            $query='SELECT * FROM '.$this->table;
+            $result=mysqli_query($this->connection,$query);
+            return $result;
         }
     }
  ?>
