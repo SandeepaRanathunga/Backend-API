@@ -23,8 +23,8 @@
             'created_at'=>$created_at
         );
         array_push($resultArray['data'],$resultItem);
-        $jsonArray=json_encode($resultArray);
-        echo $jsonArray;
+        $jsonResult=json_encode($resultArray);
+        echo $jsonResult;
     }
     else{
         $error=array('message'=>'data not found!');

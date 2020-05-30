@@ -24,16 +24,19 @@
         public function create(){
             $query="INSERT INTO $this->table(title,body,autor) VALUES('$this->title','$this->body','$this->autor')";
             $result=mysqli_query($this->connection,$query);
+            echo $result;
             return $result;
         }
-        public function put(){
+        public function update(){
             $query="UPDATE $this->table SET title='$this->title',body='$this->body',autor='$this->autor' WHERE id='$this->id'";
-            $result=mysqli_query($this->connection,$query);
+            mysqli_query($this->connection,$query);
+            $result=mysqli_affected_rows($this->connection);
             return $result;
         }
         public function delete(){
-            $query="DELETE FROM $this->table WHERE id=$this->id";
-            $resutl=mysqli_query($this->connection,$query);
+            $query="DELETE FROM $this->table WHERE id='$this->id'";
+            mysqli_query($this->connection,$query);
+            $result=mysqli_affected_rows($this->connection);
             return $result;
         }
     }

@@ -1,7 +1,7 @@
 <?php
   header('Access-Control-Allow-Origin:*');
   header('Content-Type:application/json');
-  header('Access-Control-Allow-Methods:DELETE');
+  header('Access-Control-Allow-Methods:PUT');
   header('Access-Control-Allow-Headers:Content-Type,Access-Control-Allow-Headers,Autorization,X-Requested-With');
 
   include '../config/config.php';
@@ -10,15 +10,19 @@
   $database=new DBConfig();
   $connection=$database->connect();
   $request=new Request($connection);
+  
+  $jsonData=file_get_contents('php://input');
 
-    $jsonData=file_get_contents('php://input');
-    $dataArray=json_decode($jsonData,true);
+  $dataArray=json_decode($jsonData,true);
     $request->id=$dataArray['id'];
+    $request->title=$dataArray['title'];
+    $request->body=$dataArray['body'];
+    $request->autor=$dataArray['autor'];
 
-  $result=$request->delete();
+  $result=$request->update();
 
   if($result){
-      $message=array('message'=>'Record deleted sucessfullys');
+      $message=array('message'=>'Data updated sucessfully');
       echo json_encode($message);
   }
   else{
